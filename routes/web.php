@@ -14,3 +14,7 @@ Route::get('/tasks', 'TaskController@index');
 Route::get('/tasks/{task}', 'TaskController@show');
 
 Route::get('/about', '');
+
+Route::get('reporting', function(){
+   return 'hello';
+});

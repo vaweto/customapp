@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\UserWasBanned;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
     {
         $user = \Auth::user()->name;
         $tasks = DB::table('tasks')->latest()->get();
-
+        event(new UserWasBanned(\Auth::user()));
         return view('home',[
             'name' => $user,
             'tasks' => $tasks

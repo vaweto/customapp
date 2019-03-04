@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        //$schedule->exec('touch foo.txt')->everyFiveMinutes();
+        // $schedule->command('laracasts:clear-history')->monthly();
+        // $schedule->command('laracasts:daily-report')->dailyAt('23:55');
+
     }
 
     /**

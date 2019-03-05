@@ -14,7 +14,8 @@ class Team extends Model
         //guard
         $this->guardAgainstTooManyMembers();
 
-        $this->members()->save($user);
+        $method = $user instanceof USER ? 'save' : 'saveMany';
+        $this->members()->$method($user);
     }
 
     public function members()
@@ -25,6 +26,16 @@ class Team extends Model
     public function count()
     {
         return $this->members()->count();
+    }
+
+    public function remove($user)
+    {
+        return $user->leaveTeam();
+    }
+
+    public function removeAll()
+    {
+        return $this->members()->update(['team_id' => null]);
     }
 
     protected function guardAgainstTooManyMembers()

@@ -30,4 +30,9 @@ class User extends Authenticatable
     public function isSubscribed() {
         return true;
     }
+
+    public function leaveTeam(){
+        $this->team_id = null;
+        $this->save();
+    }
 }

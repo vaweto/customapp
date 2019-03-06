@@ -58,7 +58,7 @@ class TeamTest extends TestCase
 
         $userone = factory(User::class)->create();
         $userTwo = factory(User::class)->create();
-        $userThree = factory(User::class)->create();
+
 
         $team->add($userone);
         $team->add($userTwo);
@@ -67,8 +67,21 @@ class TeamTest extends TestCase
         $this->assertEquals(2,$team->count());
 
         $this->expectException(\Exception::class);
+        $userThree = factory(User::class)->create();
         $team->add($userThree);
 
+    }
+
+    /** @test  */
+    public function a_team_has_a_maximum_size_when_pass_a_collection()
+    {
+        $team = factory(Team::class)->create(['size'=>2]);
+
+        $users = factory(User::class, 3)->create();
+
+        $this->expectException(\Exception::class);
+
+        $team->add($users);
     }
 
     /** @test  */
@@ -98,5 +111,6 @@ class TeamTest extends TestCase
 
         $this->assertEquals(0, $team->count());
     }
+
 
 }
